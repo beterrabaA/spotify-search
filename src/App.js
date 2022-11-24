@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 
 
 function App() {
-  const [searchInput,setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   return (
     <div className="App">
       <Container>
@@ -18,8 +18,11 @@ function App() {
                 console.log('Pressed Enter')
               }
             }}
-            onChange={ event => setSearchInput(event.target.value)}
+            onChange={event => setSearchInput(event.target.value)}
           />
+          <Button onClick={() => console.log("Cliked button")}>
+            Search
+          </Button>
         </InputGroup>
       </Container>
     </div>
