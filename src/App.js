@@ -23,6 +23,8 @@ function App() {
     fetch('https://accounts.spotify.com/api/token', authParameters).then(result => result.json()).then(data => setAccessToken(data.access_token))
   }, [])
 
+  const search = async () => console.log(`Search for ${searchInput}`);
+
   return (
     <div className="App">
       <Container>
@@ -32,12 +34,12 @@ function App() {
             type='input'
             onKeyPress={event => {
               if (event.key === 'Enter') {
-                console.log('Pressed Enter')
+                search()
               }
             }}
             onChange={event => setSearchInput(event.target.value)}
           />
-          <Button onClick={() => console.log("Cliked button")}>
+          <Button onClick={() => search()}>
             Search
           </Button>
         </InputGroup>
