@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
 
     // API Access Token
-    
+
     const authParameters = {
       method: 'POST',
       headers: {
@@ -49,6 +49,10 @@ function App() {
       .then(data => data.artists.items[0].id)
 
     // Get request with Artist ID grab all the albums from that artist
+
+    const artistAlbums = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?include_groups=album&limit=40`, artistParameters)
+      .then(response => response.json())
+      .then(data => data)
 
     // Display those albums to the bar
 
