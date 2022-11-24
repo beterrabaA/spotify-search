@@ -9,10 +9,12 @@ const CLIENT_SECRET = 'e48477dcf77942fdab00d08f044bab25';
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
-  const [accessToken,setAccessToken] = useState("")
- 
+  const [accessToken, setAccessToken] = useState("")
+
   useEffect(() => {
+
     // API Access Token
+    
     const authParameters = {
       method: 'POST',
       headers: {
@@ -20,10 +22,37 @@ function App() {
       },
       body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
     }
-    fetch('https://accounts.spotify.com/api/token', authParameters).then(result => result.json()).then(data => setAccessToken(data.access_token))
+
+    fetch('https://accounts.spotify.com/api/token', authParameters)
+      .then(result => result.json())
+      .then(data => setAccessToken(data.access_token))
+
   }, [])
 
-  const search = async () => console.log(`Search for ${searchInput}`);
+  // Search
+  const search = async () => {
+
+    console.log(`Search for ${searchInput}`)
+
+    // Get request using search to get the Artist ID
+
+    const artistParameters = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }
+
+    const artistID = await fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=artist`, artistParameters)
+      .then(reponse => reponse.json())
+      .then(data => data.artists.items[0].id)
+
+    // Get request with Artist ID grab all the albums from that artist
+
+    // Display those albums to the bar
+
+  };
 
   return (
     <div className="App">
