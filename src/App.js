@@ -10,7 +10,7 @@ const CLIENT_SECRET = 'e48477dcf77942fdab00d08f044bab25';
 function App() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("")
-
+  const [artistAlbums,setArtistAlbums] = useState([])
   useEffect(() => {
 
     // API Access Token
@@ -52,7 +52,7 @@ function App() {
 
     const artistAlbums = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?include_groups=album&limit=40`, artistParameters)
       .then(response => response.json())
-      .then(data => data)
+      .then(data => setArtistAlbums(data.items))
 
     // Display those albums to the bar
 
@@ -79,14 +79,16 @@ function App() {
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
-          <Card>
-            <Card.Img src='#' />
+          {artistAlbums.map((e,i) => (
+          <Card key={i}>
+            <Card.Img src={e.images[0].url} />
             <Card.Body>
               <Card.Title>
-                Album Name Here
+                {e.name}
               </Card.Title>
             </Card.Body>
           </Card>
+          ))}
         </Row>
       </Container>
     </div>
