@@ -9,7 +9,8 @@ const CLIENT_SECRET = 'e48477dcf77942fdab00d08f044bab25';
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
-
+  const [accessToken,setAccessToken] = useState("")
+ 
   useEffect(() => {
     // API Access Token
     const authParameters = {
@@ -19,7 +20,7 @@ function App() {
       },
       body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
     }
-    fetch('https://accounts.spotify.com/api/token', authParameters).then(result => result.json()).then(data => console.log(data))
+    fetch('https://accounts.spotify.com/api/token', authParameters).then(result => result.json()).then(data => setAccessToken(data.access_token))
   }, [])
 
   return (
