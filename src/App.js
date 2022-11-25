@@ -11,7 +11,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("")
   const [artistAlbums, setArtistAlbums] = useState([])
-  const [filtedAlbums,setFiltedAlbums] = useState([])
+  const [filtedAlbums, setFiltedAlbums] = useState([])
   useEffect(() => {
 
     // API Access Token
@@ -33,27 +33,27 @@ function App() {
   useEffect(() => {
     const filterRest = async () => {
       let lest = []
-      if(artistAlbums.length > 1) {
+      if (artistAlbums.length > 1) {
         const pala = artistAlbums.map((e, i, a) => {
-      if (a.filter((j) => (j.name === e.name)).length > 1) {
-        lest.push(a.find((t) => t.name === e.name))
-      } else {
-        return e
+          if (a.filter((j) => (j.name === e.name)).length > 1) {
+            lest.push(a.find((t) => t.name === e.name))
+          } else {
+            return e
+          }
+        })
+
+        lest = lest.filter(function (a) {
+          return !this[JSON.stringify(a)] && (this[JSON.stringify(a)] = true);
+        }, Object.create(null))
+
+        const filtrado = pala.filter((e) => e !== undefined)
+
+        setFiltedAlbums([...lest, ...filtrado])
       }
-    })
-    
-    lest = lest.filter(function (a) {
-      return !this[JSON.stringify(a)] && (this[JSON.stringify(a)] = true);
-    }, Object.create(null))
-    
-    const filtrado = pala.filter((e) => e !== undefined)
-    
-    setFiltedAlbums([...lest, ...filtrado])
-  }
-  }
-  filterRest()
+    }
+    filterRest()
     console.log("artistAlbums")
-  },[artistAlbums])
+  }, [artistAlbums])
 
   // Search
   const search = async () => {
@@ -110,7 +110,9 @@ function App() {
               <Card.Img src={e.images[0].url} />
               <Card.Body>
                 <Card.Title>
+                  <a href={e.external_urls.spotify}>
                   {e.name}
+                  </a>
                 </Card.Title>
               </Card.Body>
             </Card>
