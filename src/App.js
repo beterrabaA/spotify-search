@@ -10,7 +10,8 @@ const CLIENT_SECRET = 'e48477dcf77942fdab00d08f044bab25';
 function App() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("")
-  const [artistAlbums,setArtistAlbums] = useState([])
+  const [artistAlbums, setArtistAlbums] = useState([])
+  const [filtedAlbums,setFiltedAlbums] = useState([])
   useEffect(() => {
 
     // API Access Token
@@ -28,6 +29,31 @@ function App() {
       .then(data => setAccessToken(data.access_token))
 
   }, [])
+
+  useEffect(() => {
+    const filterRest = async () => {
+      let lest = []
+      if(artistAlbums.length > 1) {
+        const pala = artistAlbums.map((e, i, a) => {
+      if (a.filter((j) => (j.name === e.name)).length > 1) {
+        lest.push(a.find((t) => t.name === e.name))
+      } else {
+        return e
+      }
+    })
+    
+    lest = lest.filter(function (a) {
+      return !this[JSON.stringify(a)] && (this[JSON.stringify(a)] = true);
+    }, Object.create(null))
+    
+    const filtrado = pala.filter((e) => e !== undefined)
+    
+    setFiltedAlbums([...lest, ...filtrado])
+  }
+  }
+  filterRest()
+    console.log("artistAlbums")
+  },[artistAlbums])
 
   // Search
   const search = async () => {
@@ -50,7 +76,7 @@ function App() {
 
     // Get request with Artist ID grab all the albums from that artist
 
-    const artistAlbums = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?include_groups=album&limit=40`, artistParameters)
+    const artistAlbumsa = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?include_groups=album&limit=40`, artistParameters)
       .then(response => response.json())
       .then(data => setArtistAlbums(data.items))
 
@@ -79,15 +105,15 @@ function App() {
       </Container>
       <Container>
         <Row className='mx-2 row row-cols-4'>
-          {artistAlbums.map((e,i) => (
-          <Card key={i}>
-            <Card.Img src={e.images[0].url} />
-            <Card.Body>
-              <Card.Title>
-                {e.name}
-              </Card.Title>
-            </Card.Body>
-          </Card>
+          {filtedAlbums.map((e, i) => (
+            <Card key={i}>
+              <Card.Img src={e.images[0].url} />
+              <Card.Body>
+                <Card.Title>
+                  {e.name}
+                </Card.Title>
+              </Card.Body>
+            </Card>
           ))}
         </Row>
       </Container>
