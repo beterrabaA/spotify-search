@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap'
@@ -52,13 +53,10 @@ function App() {
       }
     }
     filterRest()
-    console.log("artistAlbums")
   }, [artistAlbums])
 
   // Search
   const search = async () => {
-
-    console.log(`Search for ${searchInput}`)
 
     // Get request using search to get the Artist ID
 
