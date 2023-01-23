@@ -85,7 +85,7 @@ function App() {
   return (
     <div className="App">
       <Container>
-        <InputGroup className='mb-3' size='lg'>
+        <InputGroup className='mb-3 pt-4' size='lg'>
           <FormControl
             placeholder='Search For Artist'
             type='input'
