@@ -1,5 +1,5 @@
 
-# Spotfy Search
+# Spotfiy Search
 
 In this project, a simple application for search your favorites artists albums.
 ## Installation
