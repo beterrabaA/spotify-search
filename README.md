@@ -4,11 +4,11 @@
 In this project, a simple application for search your favorites artists albums.
 ## Installation
 
-Clone and install the dependencies for `spotfy-search` locally:
+Clone and install the dependencies for `spotify-search` locally:
 
 ```bash
-  git clone git@github.com:Lerpardo/spotfy-search.git
-  cd spotfy-search
+  git clone git@github.com:Lerpardo/spotify-search.git
+  cd spotify-search
   npm install
 ```
     
