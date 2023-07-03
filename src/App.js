@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 
-const CLIENT_ID = '61f9ced8db7f496d9a3c7bd711849dba';
-const CLIENT_SECRET = 'e48477dcf77942fdab00d08f044bab25';
+const CLIENT_ID = 'CLIENT_ID';
+const CLIENT_SECRET = 'CLIENT_SECRET';
 
 
 function App() {
