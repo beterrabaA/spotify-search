@@ -2,6 +2,8 @@
 # Spotfiy Search
 
 In this project, a simple application for search your favorites artists albums.
+
+![Tela de pesquisa](./src/img/Captura%20de%20tela%20de%202023-07-02%2021-16-22.png)
 ## Installation
 
 Clone and install the dependencies for `spotify-search` locally:
